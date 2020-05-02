@@ -19,7 +19,7 @@ using MySql.Data.MySqlClient;
 namespace JSONAPI
 {
     /*
-    Når siden ReadJSON.aspx lader, så henter ReadJSON.aspx.cs informasjon fra API og lagrer den i instansierte collections for å gjøre
+    Når ReadJSON.aspx lader, så henter ReadJSON.aspx.cs informasjon fra API og lagrer den i instansierte collections for å gjøre
     informasjonen mulig å aksessere og behandle. Når den har hentet alt av informasjon den trenger fra API så 
     kobler den seg opp mot MySQL databasen og laster opp informasjonen.
     */
