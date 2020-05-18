@@ -41,6 +41,7 @@ namespace JSONAPI
                 CircuitsCollection circuitsCollection = GetCircuitsFromAPI(webClient);
                 RacesCollection racesCollection = GetRacesFromAPI(webClient);
 
+                //viser det den har hentet fra API i tabeller
                 DisplayTables(driversCollection, constructorsCollection, racesCollection, circuitsCollection);
 
                 //kobler til database og setter inn API samlingene      
@@ -54,6 +55,7 @@ namespace JSONAPI
             if (!Page.IsPostBack)
             {
                 //DRIVERS
+                driversTable.Append("<h1>DRIVERS</h1>");
                 driversTable.Append("<table border ='1'>");
                 driversTable.Append("<tr><th>Driver ID</th><th>url</th><th>Given name</th><th>Family name</th><th>Date of Birth</th><th>Nationality</th>");
                 driversTable.Append("</tr>");
@@ -72,6 +74,7 @@ namespace JSONAPI
                 PlaceHolder1.Controls.Add(new Literal { Text = driversTable.ToString() });
 
                 //CONSTRUCTORS
+                constructorsTable.Append("<h1>CONSTRUCTORS</h1>");
                 constructorsTable.Append("<table border ='1'>");
                 constructorsTable.Append("<tr><th>Constructor ID</th><th>url</th><th>Name</th><th>Nationality</th>");
                 constructorsTable.Append("</tr>");
@@ -89,8 +92,9 @@ namespace JSONAPI
                 PlaceHolder2.Controls.Add(new Literal { Text = constructorsTable.ToString() });
 
                 //RACES 
+                racesTable.Append("<h1>RACES</h1>");
                 racesTable.Append("<table border ='1'>");
-                driversTable.Append("<tr><th>Race name</th><th>Circuit name</th><th>url</th><th>Season</th><th>Round</th><th>Date</th><th>Time</th>");
+                racesTable.Append("<tr><th>Race name</th><th>Circuit name</th><th>url</th><th>Season</th><th>Round</th><th>Date</th><th>Time</th>");
                 racesTable.Append("</tr>");
 
                 for (var i = 0; i < racesCollection.Races.Count; i++)
@@ -109,6 +113,7 @@ namespace JSONAPI
                 PlaceHolder3.Controls.Add(new Literal { Text = racesTable.ToString() });
 
                 //CIRCUITS
+                circuitsTable.Append("<h1>CIRCUITS</h1>");
                 circuitsTable.Append("<table border ='1'>");
                 circuitsTable.Append("<tr><th>Circuit ID</th><th>url</th><th>Circuit Name</th><th>Location</th><th>Country</th>");
                 circuitsTable.Append("</tr>");
@@ -129,6 +134,7 @@ namespace JSONAPI
                 //RESULTS
                 int y = racesCollection.Races.Count;
                 int n = driversCollection.Drivers.Count;
+                resultsTable.Append("<h1>RESULTS</h1>");
                 resultsTable.Append("<table border ='1'>");
                 resultsTable.Append("<tr><th>Constructor ID</th><th>Race name</th><th>Circuit ID</th><th>Driver ID</th><th>Number</th><th>Position</th><th>Points</th><th>Grid</th><th>Laps</th><th>Status</th>");
                 resultsTable.Append("</tr>");
@@ -149,26 +155,12 @@ namespace JSONAPI
                         resultsTable.Append("<td>" + racesCollection.Races[m].Results[i].Laps + "</td>");
                         resultsTable.Append("<td>" + racesCollection.Races[m].Results[i].Status + "</td>");
                         resultsTable.Append("</tr>");
-
                     }
                 }
                 resultsTable.Append("</table>");
                 PlaceHolder5.Controls.Add(new Literal { Text = resultsTable.ToString() });
-
-
-
-                /*
-                For å gjøre andre spørringer i konsoll som gir svar tilbake bruker man ExecuteScalar() i stedet for ExecuteNonQuery().
-                Kan gjøres på lik måte som over om man ønsker resultat for å beholde i variabel eller slik:
-
-                cmd.CommandText = "SELECT COUNT(driverId) FROM Drivers";
-                var query = cmd.ExecuteScalar().ToString();
-                System.Diagnostics.Debug.WriteLine($"MySQL query: {query}");
-                */
-
-
-
             }
+
         }
 
         private static void UpdateDB(DriversCollection driversCollection, ConstructorsCollection constructorsCollection, RacesCollection racesCollection, CircuitsCollection circuitsCollection, MySqlCommand cmd)
