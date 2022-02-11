@@ -287,7 +287,7 @@ namespace JSONAPI
         private static MySqlCommand EstablishConnectionToDB()
         {
             //Etablerer tilkobling
-            string cs = @"server=256328.db.tornado-node.net;userid=mysql256328;password=V\S|=Sv*D*Z3;database=mysql256328";
+            string cs = @"server;userid;password;database";
             var con = new MySqlConnection(cs);
             con.Open();
             var cmd = new MySqlCommand();
